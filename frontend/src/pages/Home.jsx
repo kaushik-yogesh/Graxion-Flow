@@ -174,29 +174,86 @@ const DashboardMockup = () => (
           </span>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-5">
-          {[
-            { label: "Messages Sent", value: "12.4K", trend: "+14%" },
-            { label: "Avg Engagement", value: "89%", trend: "+5%" },
-            { label: "Posts Published", value: "234", trend: "+22%" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-xl border border-slate-100 bg-white p-3 sm:p-4 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex justify-between items-start mb-2">
-                <p className="text-[10px] sm:text-xs text-slate-500 font-medium">
-                  {stat.label}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-5">
+          {/* Main Hero Stat */}
+          <div className="col-span-2 sm:col-span-2 rounded-2xl bg-slate-900 p-4 sm:p-5 shadow-lg relative overflow-hidden flex flex-col justify-between group">
+            <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl group-hover:bg-blue-500/30 transition-all duration-500"></div>
+            <div className="relative z-10 flex justify-between items-start mb-6">
+              <div>
+                <p className="text-xs text-slate-400 font-medium mb-1">
+                  Messages Sent
                 </p>
-                <span className="text-[9px] font-bold text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded">
-                  {stat.trend}
-                </span>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    12.4K
+                  </p>
+                  <span className="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full border border-emerald-400/20">
+                    +14%
+                  </span>
+                </div>
               </div>
-              <p className="text-lg sm:text-2xl font-bold text-slate-900">
-                {stat.value}
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+              </div>
+            </div>
+            
+            <div className="relative z-10 flex items-center gap-3 mt-auto">
+              <div className="flex -space-x-2">
+                {['JD', 'AM', 'RK', 'JS'].map((initials, i) => (
+                  <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-slate-900 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center text-[8px] font-bold text-blue-800">
+                    {initials}
+                  </div>
+                ))}
+              </div>
+              <p className="text-[10px] sm:text-xs text-slate-400">
+                Active in last hour
               </p>
             </div>
-          ))}
+          </div>
+
+          {/* Social Channel Stat */}
+          <div className="col-span-1 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-pink-50 flex items-center justify-center">
+                <Instagram className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-600" />
+              </div>
+            </div>
+            <div>
+              <p className="text-lg sm:text-xl font-bold text-slate-900 mb-0.5">89%</p>
+              <p className="text-[10px] sm:text-xs text-slate-500 font-medium">Avg Engagement</p>
+            </div>
+          </div>
+
+          {/* Activity / Status Stat */}
+          <div className="col-span-1 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+             <div className="flex justify-between items-start mb-4">
+               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                 <Workflow className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
+               </div>
+             </div>
+             <div>
+               <p className="text-lg sm:text-xl font-bold text-slate-900 mb-0.5">24 <span className="text-[10px] sm:text-xs text-slate-400 font-normal">Active</span></p>
+               <p className="text-[10px] sm:text-xs text-slate-500 font-medium">Live Workflows</p>
+             </div>
+          </div>
+
+          {/* Progress / Goal Stat */}
+          <div className="col-span-2 rounded-2xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
+              </div>
+              <div>
+                <p className="text-xs sm:text-sm font-bold text-slate-900">Campaigns Goal</p>
+                <p className="text-[10px] text-slate-500">234 posts published</p>
+              </div>
+            </div>
+            <div className="flex flex-col items-end gap-1">
+              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                +22%
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Chart Area */}
