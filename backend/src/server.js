@@ -293,9 +293,17 @@ app.use('/api/webhooks/ecommerce', ecommerceRoutes);
 
 app.use('/api/webhooks/linkedin', linkedinWebhookRoutes);
 
-// ─── 404 Handler ─────────────────────────────────────────
-app.all('*', (req, res, next) => {
-  next(new AppError(`Route ${req.originalUrl} not found.`, 404));
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../../frontend/build')));
+
+// ─── 404 Handler for APIs ─────────────────────────────────────────
+app.all('/api/*', (req, res, next) => {
+  next(new AppError(`API Route ${req.originalUrl} not found.`, 404));
+});
+
+// Fallback to React app for non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
 });
 
 // ─── Global Error Handler ─────────────────────────────────
@@ -307,8 +315,8 @@ const { startDeletionScheduler } = require('./services/dataDeletionService');
 const { startInstagramWorker } = require('./jobs/instagramWorker');
 require('./workers/instagramWebhookWorker');
 // ─── Start Server ─────────────────────────────────────────
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
 
